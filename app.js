@@ -1,10 +1,11 @@
-const adviceId = document.querySelector("#adviceId");
-const adviceText = document.querySelector("#adviceText");
-const btn = document.querySelector("#btn");
+const adviceId = document.getElementById("adviceId");
+const adviceText = document.getElementById("adviceText");
+const btn = document.getElementById("btn");
 
 const getAdvice = async () => {
+  const apiUrl = "https://api.adviceslip.com/advice";
   try {
-    const response = await fetch("https://api.adviceslip.com/advice", {
+    const response = await fetch(apiUrl, {
       cache: "no-cache",
     });
     if (!response.ok) {
@@ -13,11 +14,8 @@ const getAdvice = async () => {
     const responseJson = await response.json();
     const data = responseJson.slip;
 
-    const id = `ADVICE #${data.id}`;
-    const advice = `“${data.advice}”`;
-
-    adviceId.textContent = id;
-    adviceText.textContent = advice;
+    adviceId.textContent = `ADVICE #${data.id}`;
+    adviceText.textContent = `“${data.advice}”`;
   } catch (e) {
     console.error(e);
   }
